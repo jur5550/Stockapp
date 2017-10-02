@@ -7,6 +7,7 @@ public class StockObserver implements Observer {
     private double price;
     private String stockName;
     private Subject subject;
+    private double oldPrice;
     
     // static used as a counter
     private static int observerIDTracker = 0;
@@ -34,6 +35,7 @@ public class StockObserver implements Observer {
         printThePrice();
     }
     public void setPrice(double price) {
+        this.oldPrice = this.price;
         this.price = price;
     }
     public double getPrice() {
@@ -61,7 +63,7 @@ public class StockObserver implements Observer {
     }
     public void printThePrice(){
 
-        System.out.println(String.format("Observer Update: %s \t Old Price: %s \t New Price: %s", this, getPrice(), price));
+        System.out.println(String.format("Observer Update: %s \t Old Price: %s \t New Price: %s", this, oldPrice, price));
 
     }
     public void setSubject(Subject subject) {

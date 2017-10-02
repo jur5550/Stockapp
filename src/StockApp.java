@@ -30,7 +30,7 @@ public class StockApp {
         while (true) {
 
             getTheStock.run();
-            stockGrabber.notifyObserver();
+            //stockGrabber.notifyObserver();
             for(StockObserver observer : stockGrabber.observers){
                 observer.printThePrice();
             }
