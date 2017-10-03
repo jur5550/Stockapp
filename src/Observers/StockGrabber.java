@@ -8,7 +8,10 @@ import java.util.ArrayList;
 public class StockGrabber implements Subject {
     public ArrayList<StockObserver> observers;
     private String message;
-    private double price;
+    private double GOOGLEPrice;
+    private double APPLEPrice;
+    private double IBMPrice;
+
 
     private boolean changed;
 
@@ -32,7 +35,20 @@ public class StockGrabber implements Subject {
     public void notifyObserver() {
 
         for(Observer observer : observers){
-            observer.update(price);
+            if(observer instanceof GoogleObserver)
+            {
+                observer.update(getGOOGLEPrice());
+            }
+            else if(observer instanceof AppleObserver)
+            {
+                observer.update(getAPPLEPrice());
+
+            }
+            else if(observer instanceof IBMObserver)
+            {
+                observer.update(getIBMPrice());
+
+            }
         }
     }
 
@@ -41,14 +57,27 @@ public class StockGrabber implements Subject {
         return this.message;
     }
 
-    public double getPrice()
-    {
-        return price;
+    public double getGOOGLEPrice() {
+        return GOOGLEPrice;
     }
-    public void setPrice(double newPrice){
 
-        this.price = newPrice;
-        notifyObserver();
+    public double getAPPLEPrice() {
+        return APPLEPrice;
+    }
 
+    public double getIBMPrice() {
+        return IBMPrice;
+    }
+
+    public void setGOOGLEPrice(double GOOGLEPrice) {
+        this.GOOGLEPrice = GOOGLEPrice;
+    }
+
+    public void setAPPLEPrice(double APPLEPrice) {
+        this.APPLEPrice = APPLEPrice;
+    }
+
+    public void setIBMPrice(double IBMPrice) {
+        this.IBMPrice = IBMPrice;
     }
 }

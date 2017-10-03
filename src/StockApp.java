@@ -18,9 +18,10 @@ public class StockApp {
         stockGrabber.register(observer2);
         stockGrabber.register(observer3);
 
-        observer1.setPrice(197.00);
-        observer2.setPrice(677.60);
-        observer3.setPrice(676.40);
+        stockGrabber.setGOOGLEPrice(197.00);
+        stockGrabber.setAPPLEPrice(677.60);
+        stockGrabber.setIBMPrice(676.40);
+
         observer1.printThePrice();
         observer2.printThePrice();
         observer3.printThePrice();
@@ -32,12 +33,8 @@ public class StockApp {
             getTheStock.run();
             //stockGrabber.notifyObserver();
             for(StockObserver observer : stockGrabber.observers){
-                observer.printThePrice();
+             //   observer.printThePrice();
             }
-            try {
-                Thread.sleep(2000);}
-                catch(InterruptedException e){}
-
             }
 
         }

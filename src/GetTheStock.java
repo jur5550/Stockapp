@@ -20,25 +20,28 @@ public class GetTheStock implements Runnable {
     }
     public void run()
     {
-
-        for(StockObserver observer : stockGrabber.observers){
-            double randNum = (Math.random() * (.1)) + .05;
-            DecimalFormat df = new DecimalFormat("#.##");
-            DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-            dfs.setDecimalSeparator('.');
-            df.setDecimalFormatSymbols(dfs);
-            System.out.println(observer.getPrice());
-
-            price = (Double.valueOf(df.format((observer.getPrice() + randNum))));
-            System.out.println(price);
-            observer.setPrice(price);
-            //observer.update(stockGrabber.getPrice());
+            stockGrabber.setAPPLEPrice(newPrice(stockGrabber.getAPPLEPrice()));
+            stockGrabber.setGOOGLEPrice(newPrice(stockGrabber.getGOOGLEPrice()));
+            stockGrabber.setIBMPrice(newPrice(stockGrabber.getIBMPrice()));
+            stockGrabber.notifyObserver();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             }catch(InterruptedException e) {}
-        }
+    }
 
 
 
+
+
+    public double newPrice(double price)
+    {
+        double randNum = (Math.random() * (.1)) + .05;
+        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+        price = (Double.valueOf(df.format(price + randNum)));
+
+        return price;
     }
 }
